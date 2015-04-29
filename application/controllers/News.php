@@ -1,21 +1,21 @@
 <?php
+//News.php controller
 class News extends CI_Controller {
 
     public function __construct()
-    {
+    {//everything here is global to all methods in the controller
             parent::__construct();
             $this->load->model('news_model');
-    }
+            $this->config->set_item('banner', 'Global News Banner');
+    }#end constructor
 
     public function index()
     {
             $data['news'] = $this->news_model->get_news();
             $data['title'] = 'News archive';
 
-            $this->load->view('templates/header', $data);
             $this->load->view('news/index', $data);
-            $this->load->view('templates/footer');
-    }
+    }#end index()
 
 
     public function view($slug = NULL)
@@ -29,12 +29,8 @@ class News extends CI_Controller {
 
             $data['title'] = $data['news_item']['title'];
 
-            $this->load->view('templates/header', $data);
             $this->load->view('news/view', $data);
-            $this->load->view('templates/footer');
-
-
-    }
+    }#end view()
 
 
     public function create()
